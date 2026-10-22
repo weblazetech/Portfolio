@@ -7,8 +7,8 @@ export const CLIENT_WEBSITES: Project[] = [
     category: 'Website Design & Development',
     description: 'A modern digital presence designed to showcase the Lavish brand and create a polished customer experience.',
     url: 'https://lavishlooks.srishanth.com/',
-    previewType: 'image',
-    previewImage: '/images/projects/lavish.jpg',
+    previewType: 'slideshow',
+    previewImage: '/images/lavish/screenshot-1.jpg',
     slideshowImages: [
       '/images/lavish/screenshot-1.jpg',
       '/images/lavish/screenshot-2.jpg',
@@ -24,13 +24,30 @@ export const CLIENT_WEBSITES: Project[] = [
     category: 'Website Design & Development',
     description: 'A refined website experience designed around the Palluvo brand, products and customer journey.',
     url: 'https://palluvo.store',
-    previewType: 'image',
+    previewType: 'slideshow',
     previewImage: '/images/palluvo/screenshot-1.jpg',
     slideshowImages: [
       '/images/palluvo/screenshot-1.jpg',
       '/images/palluvo/screenshot-2.jpg',
       '/images/palluvo/screenshot-3.jpg',
       '/images/palluvo/screenshot-4.jpg'
+    ],
+    buttonText: 'View Website →'
+  },
+  {
+    id: 'lol',
+    name: 'LOL',
+    category: 'Website Design & Development',
+    description: 'An editorial wedding and celebration photography studio website showcasing stories, monographs and an interactive visual archive.',
+    url: 'https://lol.weblaze.in/',
+    previewType: 'slideshow',
+    previewImage: '/images/lol/screenshot-1.jpg',
+    slideshowImages: [
+      '/images/lol/screenshot-1.jpg',
+      '/images/lol/screenshot-2.jpg',
+      '/images/lol/screenshot-3.jpg',
+      '/images/lol/screenshot-4.jpg',
+      '/images/lol/screenshot-5.jpg'
     ],
     buttonText: 'View Website →'
   },

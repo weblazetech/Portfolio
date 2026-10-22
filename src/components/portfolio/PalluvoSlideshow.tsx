@@ -4,6 +4,7 @@ interface PalluvoSlideshowProps {
   images?: string[]
   interval?: number
   transitionDuration?: number
+  initialDelay?: number
 }
 
 const DEFAULT_IMAGES = [
@@ -13,10 +14,69 @@ const DEFAULT_IMAGES = [
   '/images/palluvo/screenshot-4.jpg'
 ]
 
+// Global pointer tracking and scroll-aware hit-testing coordinator
+let globalPointerX = -1
+let globalPointerY = -1
+let hasPointer = false
+let globalListenersAttached = false
+const subscribers = new Set<() => void>()
+
+function notifySubscribers() {
+  subscribers.forEach(cb => cb())
+}
+
+let scrollRafId: number | null = null
+
+function handleGlobalScroll() {
+  if (scrollRafId !== null) return
+  scrollRafId = requestAnimationFrame(() => {
+    scrollRafId = null
+    if (hasPointer && globalPointerX >= 0 && globalPointerY >= 0) {
+      notifySubscribers()
+    }
+  })
+}
+
+function handleGlobalPointerMove(e: MouseEvent | PointerEvent) {
+  globalPointerX = e.clientX
+  globalPointerY = e.clientY
+  hasPointer = true
+}
+
+function handleGlobalPointerLeave() {
+  hasPointer = false
+  globalPointerX = -1
+  globalPointerY = -1
+  notifySubscribers()
+}
+
+function ensureGlobalListeners() {
+  if (globalListenersAttached || typeof window === 'undefined') return
+  globalListenersAttached = true
+
+  window.addEventListener('pointermove', handleGlobalPointerMove, { passive: true })
+  window.addEventListener('mousemove', handleGlobalPointerMove, { passive: true })
+  window.addEventListener('scroll', handleGlobalScroll, { passive: true })
+  window.addEventListener('wheel', handleGlobalScroll, { passive: true })
+  document.addEventListener('mouseleave', handleGlobalPointerLeave, { passive: true })
+}
+
+function removeGlobalListeners() {
+  if (!globalListenersAttached || typeof window === 'undefined') return
+  globalListenersAttached = false
+
+  window.removeEventListener('pointermove', handleGlobalPointerMove)
+  window.removeEventListener('mousemove', handleGlobalPointerMove)
+  window.removeEventListener('scroll', handleGlobalScroll)
+  window.removeEventListener('wheel', handleGlobalScroll)
+  document.removeEventListener('mouseleave', handleGlobalPointerLeave)
+}
+
 export const PalluvoSlideshow: React.FC<PalluvoSlideshowProps> = ({
   images = DEFAULT_IMAGES,
-  interval = 1.8,
-  transitionDuration = 600
+  interval = 0.85,
+  transitionDuration = 450,
+  initialDelay = 0.08
 }) => {
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -27,8 +87,11 @@ export const PalluvoSlideshow: React.FC<PalluvoSlideshowProps> = ({
   }, [images])
 
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [isAnimating, setIsAnimating] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
+  const [withTransition, setWithTransition] = useState(true)
+
+  const isHoveredRef = useRef(isHovered)
+  isHoveredRef.current = isHovered
 
   // Preload secondary images on mount
   useEffect(() => {
@@ -39,78 +102,145 @@ export const PalluvoSlideshow: React.FC<PalluvoSlideshowProps> = ({
     })
   }, [images])
 
-  // Automatic slideshow on hover
+  // Automatic slideshow on hover: starts promptly (~80ms), then cycles
   useEffect(() => {
     if (!isHovered || images.length <= 1) return
 
-    const intervalMs = Math.max(1200, Math.round(interval * 1000))
+    let intervalTimer: ReturnType<typeof setInterval> | null = null
 
-    const timer = setInterval(() => {
-      setIsAnimating(true)
-      setCurrentIndex(prev => {
-        if (prev >= images.length) {
-          return 1
-        }
-        return prev + 1
-      })
-    }, intervalMs)
+    const initialTimer = setTimeout(() => {
+      setWithTransition(true)
+      setCurrentIndex(prev => prev + 1)
 
-    return () => clearInterval(timer)
-  }, [isHovered, images.length, interval])
+      intervalTimer = setInterval(() => {
+        setWithTransition(true)
+        setCurrentIndex(prev => prev + 1)
+      }, Math.max(500, Math.round(interval * 1000)))
+    }, Math.round(initialDelay * 1000))
 
-  // Loop back seamlessly from clone (index = length) to index 0 after transition completes
+    return () => {
+      clearTimeout(initialTimer)
+      if (intervalTimer) clearInterval(intervalTimer)
+    }
+  }, [isHovered, images.length, interval, initialDelay])
+
+  // Instant reset when reaching cloned slide (index === images.length)
   useEffect(() => {
-    if (currentIndex === images.length) {
-      const snapTimer = setTimeout(() => {
-        setIsAnimating(false)
+    if (currentIndex === images.length && images.length > 1) {
+      const timeout = setTimeout(() => {
+        setWithTransition(false)
         setCurrentIndex(0)
-      }, transitionDuration + 30)
+      }, transitionDuration)
 
-      return () => clearTimeout(snapTimer)
+      return () => clearTimeout(timeout)
     }
   }, [currentIndex, images.length, transitionDuration])
 
-  const handleTransitionEnd = useCallback((e: React.TransitionEvent) => {
-    if (e.target !== e.currentTarget) return
-    if (currentIndex === images.length) {
-      setIsAnimating(false)
-      setCurrentIndex(0)
-    }
-  }, [currentIndex, images.length])
-
-  const handleMouseEnter = useCallback(() => {
-    setIsAnimating(false)
-    setCurrentIndex(0)
-    setIsHovered(true)
-  }, [])
-
-  const handleMouseLeave = useCallback(() => {
-    setIsHovered(false)
-    setIsAnimating(false)
-    setCurrentIndex(0)
-  }, [])
-
-  // Listen on parent card as well if available
+  // Reset to slide 0 whenever hover stops
   useEffect(() => {
-    const el = containerRef.current
-    if (!el) return
-    const card = el.closest('a') || el.parentElement
-    if (!card || card === el) return
+    if (!isHovered) {
+      setCurrentIndex(0)
+      setWithTransition(true)
+    }
+  }, [isHovered])
 
-    card.addEventListener('mouseenter', handleMouseEnter)
-    card.addEventListener('mouseleave', handleMouseLeave)
+  // Check whether the container or its parent card is currently underneath the cursor
+  const checkHoverUnderCursor = useCallback(() => {
+    if (typeof window === 'undefined' || !containerRef.current) return
+
+    const canHover = window.matchMedia('(hover: hover)').matches
+    if (!canHover) {
+      if (isHoveredRef.current) {
+        setIsHovered(false)
+        setWithTransition(true)
+        setCurrentIndex(0)
+      }
+      return
+    }
+
+    if (!hasPointer || globalPointerX < 0 || globalPointerY < 0) {
+      if (isHoveredRef.current) {
+        setIsHovered(false)
+        setWithTransition(true)
+        setCurrentIndex(0)
+      }
+      return
+    }
+
+    const card = containerRef.current.closest('a') || containerRef.current
+    const rect = card.getBoundingClientRect()
+    const isInBounds =
+      globalPointerX >= rect.left &&
+      globalPointerX <= rect.right &&
+      globalPointerY >= rect.top &&
+      globalPointerY <= rect.bottom
+
+    let isUnderCursor = false
+    if (isInBounds) {
+      const el = document.elementFromPoint(globalPointerX, globalPointerY)
+      isUnderCursor =
+        el === null ||
+        card === el ||
+        card.contains(el) ||
+        el.contains(card)
+    }
+
+    if (isUnderCursor) {
+      if (!isHoveredRef.current) {
+        setWithTransition(true)
+        setIsHovered(true)
+      }
+    } else {
+      if (isHoveredRef.current) {
+        setIsHovered(false)
+        setWithTransition(true)
+        setCurrentIndex(0)
+      }
+    }
+  }, [])
+
+  // Register with global coordinator
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    ensureGlobalListeners()
+
+    subscribers.add(checkHoverUnderCursor)
+    checkHoverUnderCursor()
 
     return () => {
-      card.removeEventListener('mouseenter', handleMouseEnter)
-      card.removeEventListener('mouseleave', handleMouseLeave)
+      subscribers.delete(checkHoverUnderCursor)
+      if (subscribers.size === 0) {
+        removeGlobalListeners()
+      }
     }
-  }, [handleMouseEnter, handleMouseLeave])
+  }, [checkHoverUnderCursor])
+
+  const handlePointerEnter = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    globalPointerX = e.clientX
+    globalPointerY = e.clientY
+    hasPointer = true
+
+    if (typeof window !== 'undefined') {
+      const canHover = window.matchMedia('(hover: hover)').matches
+      if (!canHover) return
+    }
+
+    notifySubscribers()
+  }, [])
+
+  const handlePointerLeave = useCallback(() => {
+    if (isHoveredRef.current) {
+      setIsHovered(false)
+      setWithTransition(true)
+      setCurrentIndex(0)
+    }
+  }, [])
 
   return (
     <div
       ref={containerRef}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onPointerEnter={handlePointerEnter}
+      onPointerLeave={handlePointerLeave}
       style={{
         position: 'relative',
         width: '100%',
@@ -123,17 +253,16 @@ export const PalluvoSlideshow: React.FC<PalluvoSlideshowProps> = ({
       }}
     >
       <div
-        onTransitionEnd={handleTransitionEnd}
         style={{
           display: 'flex',
           flexDirection: 'row',
           width: '100%',
           height: '100%',
           transform: `translateX(-${currentIndex * 100}%)`,
-          transition: isAnimating
-            ? `transform ${transitionDuration}ms ease-in-out`
+          transition: withTransition
+            ? `transform ${transitionDuration}ms cubic-bezier(0.25, 1, 0.5, 1)`
             : 'none',
-          willChange: isAnimating ? 'transform' : 'auto'
+          willChange: 'transform'
         }}
       >
         {slides.map((src, idx) => (
@@ -151,8 +280,8 @@ export const PalluvoSlideshow: React.FC<PalluvoSlideshowProps> = ({
               src={src}
               alt={
                 idx < images.length
-                  ? `Palluvo screenshot ${idx + 1}`
-                  : 'Palluvo screenshot 1'
+                  ? `Preview screenshot ${idx + 1}`
+                  : 'Preview screenshot 1'
               }
               loading={idx === 0 ? 'eager' : 'lazy'}
               style={{
