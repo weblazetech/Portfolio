@@ -36,7 +36,7 @@ export const CLIENT_WEBSITES: Project[] = [
   },
   {
     id: 'lol',
-    name: 'LOL',
+    name: 'LIGHT OF LOVE',
     category: 'Website Design & Development',
     description: 'An editorial wedding and celebration photography studio website showcasing stories, monographs and an interactive visual archive.',
     url: 'https://lol.weblaze.in/',
@@ -48,6 +48,23 @@ export const CLIENT_WEBSITES: Project[] = [
       '/images/lol/screenshot-3.jpg',
       '/images/lol/screenshot-4.jpg',
       '/images/lol/screenshot-5.jpg'
+    ],
+    buttonText: 'View Website →'
+  },
+  {
+    id: 'wedraaga',
+    name: 'WEDRAAGA',
+    category: 'Website Design & Development',
+    description: 'A bespoke wedding planning and guest RSVP studio featuring curated Hyderabad venues, floral architecture, and celebration planning tools.',
+    url: 'https://wedraaga.weblaze.in/',
+    previewType: 'slideshow',
+    previewImage: '/images/wedraaga/screenshot-1.jpg',
+    slideshowImages: [
+      '/images/wedraaga/screenshot-1.jpg',
+      '/images/wedraaga/screenshot-2.jpg',
+      '/images/wedraaga/screenshot-3.jpg',
+      '/images/wedraaga/screenshot-4.jpg',
+      '/images/wedraaga/screenshot-5.jpg'
     ],
     buttonText: 'View Website →'
   },
