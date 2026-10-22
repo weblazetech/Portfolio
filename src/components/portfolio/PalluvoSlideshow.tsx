@@ -236,6 +236,29 @@ export const PalluvoSlideshow: React.FC<PalluvoSlideshowProps> = ({
     }
   }, [])
 
+  // Listen directly on the parent card link for immediate, frictionless hover response
+  useEffect(() => {
+    if (!containerRef.current) return
+    const card = containerRef.current.closest('a') || containerRef.current.parentElement
+    if (!card || card === containerRef.current) return
+
+    const onEnter = () => {
+      if (typeof window !== 'undefined' && !window.matchMedia('(hover: hover)').matches) return
+      setIsHovered(true)
+    }
+    const onLeave = () => {
+      setIsHovered(false)
+    }
+
+    card.addEventListener('mouseenter', onEnter)
+    card.addEventListener('mouseleave', onLeave)
+
+    return () => {
+      card.removeEventListener('mouseenter', onEnter)
+      card.removeEventListener('mouseleave', onLeave)
+    }
+  }, [])
+
   return (
     <div
       ref={containerRef}

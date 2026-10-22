@@ -74,8 +74,15 @@ export const CLIENT_WEBSITES: Project[] = [
     category: 'Website Design & Development',
     description: 'A visually engaging digital experience built to present the La Sabroso brand online.',
     url: 'https://lasabroso.srishanth.com/',
-    previewType: 'image',
-    previewImage: '/images/projects/lasabroso.jpg',
+    previewType: 'slideshow',
+    previewImage: '/images/lasabroso/screenshot-1.jpg',
+    slideshowImages: [
+      '/images/lasabroso/screenshot-1.jpg',
+      '/images/lasabroso/screenshot-2.jpg',
+      '/images/lasabroso/screenshot-3.jpg',
+      '/images/lasabroso/screenshot-4.jpg',
+      '/images/lasabroso/screenshot-5.jpg'
+    ],
     buttonText: 'View Website →'
   },
   {
@@ -84,8 +91,15 @@ export const CLIENT_WEBSITES: Project[] = [
     category: 'Website Design & Development',
     description: 'A clean, modern website designed to strengthen Papilio’s online presence and customer experience.',
     url: 'https://papilio.srishanth.com',
-    previewType: 'image',
-    previewImage: '/images/projects/papilio.jpg',
+    previewType: 'slideshow',
+    previewImage: '/images/papilio/screenshot-1.jpg',
+    slideshowImages: [
+      '/images/papilio/screenshot-1.jpg',
+      '/images/papilio/screenshot-2.jpg',
+      '/images/papilio/screenshot-3.jpg',
+      '/images/papilio/screenshot-4.jpg',
+      '/images/papilio/screenshot-5.jpg'
+    ],
     buttonText: 'View Website →'
   },
   {
@@ -94,8 +108,15 @@ export const CLIENT_WEBSITES: Project[] = [
     category: 'Website Design & Development',
     description: 'A purpose-built digital experience designed around the RoosterX brand and its audience.',
     url: 'https://roosterx.srishanth.com/',
-    previewType: 'image',
-    previewImage: '/images/projects/roosterx.jpg',
+    previewType: 'slideshow',
+    previewImage: '/images/roosterx/screenshot-1.jpg',
+    slideshowImages: [
+      '/images/roosterx/screenshot-1.jpg',
+      '/images/roosterx/screenshot-2.jpg',
+      '/images/roosterx/screenshot-3.jpg',
+      '/images/roosterx/screenshot-4.jpg',
+      '/images/roosterx/screenshot-5.jpg'
+    ],
     buttonText: 'View Website →'
   }
 ]
@@ -107,11 +128,17 @@ export const BUSINESS_SOFTWARE: Project[] = [
     category: 'CRM / Business Software',
     description: 'A business-focused CRM platform designed to organize leads, customer interactions and sales workflows.',
     url: 'https://telecrm.srishanth.com/',
-    previewType: 'image',
-    previewImage: '/images/projects/telecrm.jpg',
+    previewType: 'slideshow',
+    previewImage: '/images/opentele/screenshot-1.jpg',
+    slideshowImages: [
+      '/images/opentele/screenshot-1.jpg',
+      '/images/opentele/screenshot-2.jpg',
+      '/images/opentele/screenshot-3.jpg',
+      '/images/opentele/screenshot-4.jpg',
+      '/images/opentele/screenshot-5.jpg'
+    ],
     meta: 'Platform: Web Application · Type: Business Software · Role: Design + Development',
-    buttonText: 'View Product →',
-    placeholderSubtitle: 'Product preview coming soon'
+    buttonText: 'View Product →'
   },
   {
     id: 'pharmastore',
@@ -119,8 +146,15 @@ export const BUSINESS_SOFTWARE: Project[] = [
     category: 'POS / Retail Software',
     description: 'A point-of-sale system designed for pharmacy store operations, helping manage sales, products and day-to-day transactions.',
     url: 'https://pharmastore-gules.vercel.app/',
-    previewType: 'image',
-    previewImage: '/images/projects/pharmastore.jpg',
+    previewType: 'slideshow',
+    previewImage: '/images/pharmastore/screenshot-1.jpg',
+    slideshowImages: [
+      '/images/pharmastore/screenshot-1.jpg',
+      '/images/pharmastore/screenshot-2.jpg',
+      '/images/pharmastore/screenshot-3.jpg',
+      '/images/pharmastore/screenshot-4.jpg',
+      '/images/pharmastore/screenshot-5.jpg'
+    ],
     meta: 'Platform: Web Application · Type: Business Software · Role: Design + Development',
     buttonText: 'View Product →'
   },
@@ -130,8 +164,15 @@ export const BUSINESS_SOFTWARE: Project[] = [
     category: 'Business Software',
     description: 'A digital experience designed and developed for Goflytta.',
     url: 'https://goflytta.srishanth.com/',
-    previewType: 'image',
-    previewImage: '/images/projects/goflytta.jpg',
+    previewType: 'slideshow',
+    previewImage: '/images/goflytta/screenshot-1.jpg',
+    slideshowImages: [
+      '/images/goflytta/screenshot-1.jpg',
+      '/images/goflytta/screenshot-2.jpg',
+      '/images/goflytta/screenshot-3.jpg',
+      '/images/goflytta/screenshot-4.jpg',
+      '/images/goflytta/screenshot-5.jpg'
+    ],
     meta: 'Platform: Web Application · Type: Business Software · Role: Design + Development',
     buttonText: 'View Product →'
   }
