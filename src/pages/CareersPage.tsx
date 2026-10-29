@@ -201,7 +201,7 @@ export default function CareersPage(): React.JSX.Element {
       {/* Shared CTA Banner */}
       <CtaBanner 
         title="Don't see your specific role?" 
-        desc="Send your resume and portfolio directly to our engineering leadership at admin@weblaze.in."
+        desc="Send your resume and portfolio directly to our engineering leadership at contact@weblaze.in."
         tag="Spontaneous Applications"
       />
     </div>

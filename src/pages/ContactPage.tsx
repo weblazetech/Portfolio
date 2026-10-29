@@ -167,15 +167,15 @@ export default function ContactPage(): React.JSX.Element {
                   <div className="space-y-2">
                     <div>
                       <CopyableText
-                        text="+91 9849436612"
-                        href="tel:+919849436612"
+                        text="+91 8465067156"
+                        href="tel:+918465067156"
                         className="text-sm font-semibold text-[#1E46EB] dark:text-[#67BAF4]"
                       />
                     </div>
                     <div>
                       <CopyableText
-                        text="+91 9491636612"
-                        href="tel:+919491636612"
+                        text="+91 9581745402"
+                        href="tel:+919581745402"
                         className="text-sm font-semibold text-[#1E46EB] dark:text-[#67BAF4]"
                       />
                     </div>
@@ -188,8 +188,8 @@ export default function ContactPage(): React.JSX.Element {
                   </span>
                   <div>
                     <CopyableText
-                      text="admin@weblaze.in"
-                      href="mailto:admin@weblaze.in"
+                      text="contact@weblaze.in"
+                      href="mailto:contact@weblaze.in"
                       className="text-sm font-semibold text-[#1E46EB] dark:text-[#67BAF4]"
                     />
                   </div>

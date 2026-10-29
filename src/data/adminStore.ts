@@ -61,7 +61,8 @@ export function isAdminAuthenticated(): boolean {
 
 export function loginAdmin(email: string, pass: string): boolean {
   // Demo credentials for easy access
-  const validEmail = email.trim().toLowerCase() === 'admin@weblaze.in';
+  const normalized = email.trim().toLowerCase();
+  const validEmail = normalized === 'admin@weblaze.in' || normalized === 'contact@weblaze.in';
   const validPass = pass === 'weblaze2026' || pass === 'admin123';
 
   if (validEmail && validPass) {

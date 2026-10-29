@@ -51,16 +51,16 @@ export default function Footer(): React.JSX.Element {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
                 <div className="flex flex-wrap items-center gap-2">
-                  <CopyableText text="+91 9849436612" href="tel:+919849436612" />
+                  <CopyableText text="+91 8465067156" href="tel:+918465067156" />
                   <span>&bull;</span>
-                  <CopyableText text="+91 9491636612" href="tel:+919491636612" />
+                  <CopyableText text="+91 9581745402" href="tel:+919581745402" />
                 </div>
               </div>
               <div className="flex items-center gap-2.5">
                 <svg className="w-4 h-4 text-[#1E46EB] dark:text-[#67BAF4] shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <CopyableText text="admin@weblaze.in" href="mailto:admin@weblaze.in" className="text-[#1E46EB] dark:text-[#67BAF4] font-semibold" />
+                <CopyableText text="contact@weblaze.in" href="mailto:contact@weblaze.in" className="text-[#1E46EB] dark:text-[#67BAF4] font-semibold" />
               </div>
             </div>
           </div>

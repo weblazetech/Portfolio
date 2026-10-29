@@ -102,7 +102,7 @@ export default function PrivacyPolicyPage(): React.JSX.Element {
               Under applicable data protection laws, you have the right to request access to the personal data we hold about you, request corrections or updates, request erasure of your data, or withdraw consent for non-essential communications.
             </p>
             <p className="text-sm text-[#525866] dark:text-[#94A3B8] leading-relaxed">
-              To exercise any of these rights, please contact our Data Governance Officer at <a href="mailto:admin@weblaze.in" className="text-[#1E46EB] dark:text-[#67BAF4] font-semibold hover:underline">admin@weblaze.in</a>.
+              To exercise any of these rights, please contact our Data Governance Officer at <a href="mailto:contact@weblaze.in" className="text-[#1E46EB] dark:text-[#67BAF4] font-semibold hover:underline">contact@weblaze.in</a>.
             </p>
           </div>
 
@@ -116,8 +116,8 @@ export default function PrivacyPolicyPage(): React.JSX.Element {
             <div className="p-6 rounded-2xl border border-[#E2E8F0] dark:border-[#232734] bg-[#FAFAFA] dark:bg-[#161922] space-y-1 text-sm">
               <p className="font-bold text-[#0D0D0D] dark:text-[#FAFAFA]">Privacy &amp; Compliance Officer</p>
               <p className="text-[#525866] dark:text-[#94A3B8]">Weblaze Technologies India Private Limited</p>
-              <p className="text-[#525866] dark:text-[#94A3B8]">Email: <a href="mailto:admin@weblaze.in" className="text-[#1E46EB] dark:text-[#67BAF4] font-semibold">admin@weblaze.in</a></p>
-              <p className="text-[#525866] dark:text-[#94A3B8]">Phone: +91 9849436612 &bull; +91 9491636612</p>
+              <p className="text-[#525866] dark:text-[#94A3B8]">Email: <a href="mailto:contact@weblaze.in" className="text-[#1E46EB] dark:text-[#67BAF4] font-semibold">contact@weblaze.in</a></p>
+              <p className="text-[#525866] dark:text-[#94A3B8]">Phone: +91 8465067156 &bull; +91 9581745402</p>
             </div>
           </div>
 
