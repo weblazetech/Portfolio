@@ -135,54 +135,10 @@ export default function AboutPage(): React.JSX.Element {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto md:items-center">
             
-            {/* 1. Srishanth — Founder & Director */}
-            <RevealOnScroll delayMs={0} direction="up">
-              <TiltCard className="rounded-3xl h-full" maxTilt={5}>
-                <div className="p-8 rounded-3xl border border-[#E2E8F0] dark:border-[#232734] bg-[#FAFAFA] dark:bg-[#161922] text-center shadow-sm hover:border-[#1E46EB]/40 transition-colors h-full flex flex-col justify-between">
-                  <div>
-                    <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-[#1E46EB] to-[#228BE6] text-white flex items-center justify-center text-xl font-extrabold mx-auto mb-5 shadow-md shadow-[#1E46EB]/20">
-                      S
-                    </div>
-                    <h4 className="text-xl font-bold text-[#0D0D0D] dark:text-[#FAFAFA] font-display">
-                      Srishanth
-                    </h4>
-                    <p className="text-xs font-bold uppercase tracking-wider text-[#1E46EB] dark:text-[#67BAF4] mt-1 mb-4">
-                      Founder &amp; Director
-                    </p>
-                    <p className="text-sm text-[#525866] dark:text-[#94A3B8] leading-relaxed">
-                      Directs company vision, technical strategy, enterprise architecture, and client partnerships. Leads long-term product direction and digital modernization engagements.
-                    </p>
-                  </div>
-                </div>
-              </TiltCard>
-            </RevealOnScroll>
-
-            {/* 2. Imad Mohammed — Head of DevOps */}
-            <RevealOnScroll delayMs={100} direction="up">
-              <TiltCard className="rounded-3xl h-full" maxTilt={5}>
-                <div className="p-8 rounded-3xl border border-[#E2E8F0] dark:border-[#232734] bg-[#FAFAFA] dark:bg-[#161922] text-center shadow-sm hover:border-[#1E46EB]/40 transition-colors h-full flex flex-col justify-between">
-                  <div>
-                    <div className="w-20 h-20 rounded-full bg-[#161922] dark:bg-[#232734] border border-[#1E46EB]/30 text-[#67BAF4] flex items-center justify-center text-xl font-extrabold mx-auto mb-5 shadow-md">
-                      IM
-                    </div>
-                    <h4 className="text-xl font-bold text-[#0D0D0D] dark:text-[#FAFAFA] font-display">
-                      Imad Mohammed
-                    </h4>
-                    <p className="text-xs font-bold uppercase tracking-wider text-[#1E46EB] dark:text-[#67BAF4] mt-1 mb-4">
-                      Head of DevOps
-                    </p>
-                    <p className="text-sm text-[#525866] dark:text-[#94A3B8] leading-relaxed">
-                      Leads cloud infrastructure, automated CI/CD pipelines, container orchestration, and system reliability across client platforms and mission-critical products.
-                    </p>
-                  </div>
-                </div>
-              </TiltCard>
-            </RevealOnScroll>
-
-            {/* 3. Deshmukh Tanvi — Head of Design & Branding */}
-            <RevealOnScroll delayMs={200} direction="up">
+            {/* 1. Deshmukh Tanvi — Head of Design & Branding (Left Flank) */}
+            <RevealOnScroll delayMs={0} direction="up" className="order-2 md:order-1">
               <TiltCard className="rounded-3xl h-full" maxTilt={5}>
                 <div className="p-8 rounded-3xl border border-[#E2E8F0] dark:border-[#232734] bg-[#FAFAFA] dark:bg-[#161922] text-center shadow-sm hover:border-[#1E46EB]/40 transition-colors h-full flex flex-col justify-between">
                   <div>
@@ -197,6 +153,53 @@ export default function AboutPage(): React.JSX.Element {
                     </p>
                     <p className="text-sm text-[#525866] dark:text-[#94A3B8] leading-relaxed">
                       Drives end-to-end visual design systems, brand identity, user experience (UX) architecture, and high-conversion editorial interfaces for all digital touchpoints.
+                    </p>
+                  </div>
+                </div>
+              </TiltCard>
+            </RevealOnScroll>
+
+            {/* 2. Srishanth — Founder & Director (Center Stage / Hierarchical Hero) */}
+            <RevealOnScroll delayMs={100} direction="up" className="order-1 md:order-2 z-10">
+              <TiltCard className="rounded-3xl h-full md:-translate-y-2 lg:-translate-y-3" maxTilt={6}>
+                <div className="p-9 sm:p-10 rounded-3xl border-2 border-[#1E46EB]/40 dark:border-[#67BAF4]/40 bg-white dark:bg-[#181D28] text-center shadow-xl shadow-[#1E46EB]/10 dark:shadow-[#1E46EB]/20 relative overflow-hidden flex flex-col justify-between hover:border-[#1E46EB] dark:hover:border-[#67BAF4] transition-all">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#1E46EB]/15 dark:bg-[#67BAF4]/15 blur-2xl rounded-full pointer-events-none" />
+                  <div className="relative z-10">
+                    <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-[#1E46EB] to-[#228BE6] text-white flex items-center justify-center text-2xl font-extrabold mx-auto mb-6 shadow-lg shadow-[#1E46EB]/30 ring-4 ring-[#1E46EB]/15 dark:ring-[#67BAF4]/20">
+                      S
+                    </div>
+                    <h4 className="text-2xl font-black text-[#0D0D0D] dark:text-[#FAFAFA] font-display">
+                      Srishanth
+                    </h4>
+                    <div className="inline-block px-3 py-1 rounded-full bg-[#E7F3FD] dark:bg-[#67BAF4]/15 border border-[#1E46EB]/25 dark:border-[#67BAF4]/25 mt-2 mb-4">
+                      <p className="text-xs font-black uppercase tracking-widest text-[#1E46EB] dark:text-[#67BAF4]">
+                        Founder &amp; Director
+                      </p>
+                    </div>
+                    <p className="text-sm sm:text-[15px] text-[#525866] dark:text-[#CBD5E1] leading-relaxed">
+                      Directs company vision, technical strategy, enterprise architecture, and client partnerships. Leads long-term product direction and digital modernization engagements across all Weblaze initiatives.
+                    </p>
+                  </div>
+                </div>
+              </TiltCard>
+            </RevealOnScroll>
+
+            {/* 3. Imad Mohammed — Head of DevOps (Right Flank) */}
+            <RevealOnScroll delayMs={200} direction="up" className="order-3 md:order-3">
+              <TiltCard className="rounded-3xl h-full" maxTilt={5}>
+                <div className="p-8 rounded-3xl border border-[#E2E8F0] dark:border-[#232734] bg-[#FAFAFA] dark:bg-[#161922] text-center shadow-sm hover:border-[#1E46EB]/40 transition-colors h-full flex flex-col justify-between">
+                  <div>
+                    <div className="w-20 h-20 rounded-full bg-[#161922] dark:bg-[#232734] border border-[#1E46EB]/30 text-[#67BAF4] flex items-center justify-center text-xl font-extrabold mx-auto mb-5 shadow-md">
+                      IM
+                    </div>
+                    <h4 className="text-xl font-bold text-[#0D0D0D] dark:text-[#FAFAFA] font-display">
+                      Imad Mohammed
+                    </h4>
+                    <p className="text-xs font-bold uppercase tracking-wider text-[#1E46EB] dark:text-[#67BAF4] mt-1 mb-4">
+                      Head of DevOps
+                    </p>
+                    <p className="text-sm text-[#525866] dark:text-[#94A3B8] leading-relaxed">
+                      Leads cloud infrastructure, automated CI/CD pipelines, container orchestration, and system reliability across client platforms and mission-critical products.
                     </p>
                   </div>
                 </div>
